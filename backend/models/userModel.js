@@ -14,4 +14,17 @@ const userSchema = new Schema({
         required: true,
     }
 })
+
+//static signup method
+
+userSchema.statics.signup = async(email,password)=>{
+    const exist = await this.findOne({email})
+    if(exist){
+        throw("Email already Exists")
+    }
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password, salt)
+    const user = await this.create({email, password: hash})
+    return user
+}
 module.exports = mongoose.model('User', userSchema)
