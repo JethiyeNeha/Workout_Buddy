@@ -17,7 +17,20 @@ const userSchema = new Schema({
 
 //static signup method
 
-userSchema.statics.signup = async(email,password)=>{
+userSchema.statics.signup = async function(email,password){
+
+    //validation
+
+    if(!email || !password){
+        throw Error('All fields must be filled')
+    }
+    if(!validator.isEmail(email)){
+        throw Error('Please enter a valid email')
+    }
+    if(!validator.isStrongPassword(password)){
+        throw Error('Please enter a strong password')
+    }
+
     const exist = await this.findOne({email})
     if(exist){
         throw("Email already Exists")
