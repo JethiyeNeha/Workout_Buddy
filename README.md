@@ -1,0 +1,1 @@
+Developed a full-stack web application, using the MERN stack. Leveraged MongoDB Atlas for database management and Postman for API testing. Integrated JWT-based authentication for secure user login and signup, and implemented comprehensive CRUD functionality.
